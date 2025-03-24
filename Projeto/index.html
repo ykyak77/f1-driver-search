@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Pilotos de Fórmula 1</title>
+    <link rel="icon" href="img/icon-logo.png">
+</head>
+<body>
+
+    <h1>Consultar Piloto por:</h1>
+
+     <!-- formulario de pesquisa para consulta de pilotos -->
+    <form id="pilotForm">
+        <div id="nameField">
+            <label for="driverName">Primeiro Nome do Piloto:</label>
+            <div class="input-wrapper">
+                <input type="text" id="driverName" name="driverName" placeholder="Digite o primeiro nome do piloto...">
+                <!-- Botão de pesquisa com ícone de lupa -->
+                <button class="btn2" type="submit">
+                    <img class="icon-lupa"  src="img/lupa.png" alt="lupa pesquisa">
+                </button>
+            </div>
+        </div>
+
+        <div id="numberField" style="display: none;">
+            <label for="driverNumber">Número do Piloto:</label>
+            <div class="input-wrapper">
+                <input type="number" id="driverNumber" name="driverNumber" placeholder="Digite o número do piloto...">
+                <!-- Botão de pesquisa com ícone de lupa -->
+                <button class="btn2" type="submit">
+                    <img class="icon-lupa" src="img/lupa.png" alt="lupa pesquisa">
+                </button>
+            </div>
+            
+        </div>
+
+        <div>
+            <button class="btn1" id="btnNome" type="button">Primeiro Nome</button>
+            <button class="btn1" id="btnNumero" type="button">Número</button>
+        </div>
+
+    </form>
+    
+    <!-- sera exibido o resultado da pesquisa nessa div -->
+    <div id="result"></div> 
+
+    <script src="script.js"></script>
+
+</body>
+</html>
