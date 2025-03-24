@@ -79,7 +79,7 @@ O frontend é servido diretamente pela aplicação Express, através da pasta `/
 ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=ffffff)
 
 ## API Utilizada
-![OpenF1](https://img.shields.io/badge/OpenF1-005F56?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIHZlcnNpb249IjEu1YMXALzY...wvZz4=)
+[![OpenF1](https://img.shields.io/badge/OpenF1-005F56?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIHZlcnNpb249IjEu1YMXALzY...wvZz4=)](https://openf1.org)
 
 
 
