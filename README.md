@@ -31,8 +31,7 @@ A estrutura do projeto é a seguinte:
 2. Instale as dependências do backend:
 
     ```bash
-    npm init -y
-    npm install express axios
+    npm install
     ```
 
 3. Inicie o servidor backend:
