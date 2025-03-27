@@ -24,8 +24,8 @@ A estrutura do projeto é a seguinte:
 1. Clone este repositório em seu computador:
 
     ```bash
-    git clone https://github.com/seuusuario/seurepositorio.git
-    cd seurepositorio
+    git clone https://github.com/ykyak77/f1-driver-search
+    cd f1-driver-search 
     ```
 
 2. Instale as dependências do backend:
