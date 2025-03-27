@@ -31,13 +31,14 @@ A estrutura do projeto é a seguinte:
 2. Instale as dependências do backend:
 
     ```bash
-    npm install
+    npm init -y
+    npm install express axios
     ```
 
 3. Inicie o servidor backend:
 
     ```bash
-    npm start
+    node f1.js
     ```
 
     O servidor será iniciado na porta 3000, a menos que você defina outra porta no ambiente.
