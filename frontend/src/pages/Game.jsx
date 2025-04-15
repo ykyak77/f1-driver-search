@@ -182,7 +182,7 @@ function Game() {
             placeholder="Digite aqui..."
             className="input-numero"
             autoFocus // auto-foco no campo de entrada
-            onKeyDown={handleKeyPress} // Detecta o pressionamento da tecla Enter
+            onKeyDown={handleKeyPress} // detecta o pressionamento da tecla Enter
           />
           <button onClick={verificar} className="btn-enviar">Enviar</button>
         </div>
