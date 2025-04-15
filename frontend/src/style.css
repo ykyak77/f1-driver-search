@@ -1,0 +1,194 @@
+/* esconde os campos de nome e numero de piloto por padrão */
+/* #nameField  , #numberField, #result{
+  display: none;
+} */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0px;
+  text-align: center;
+  /* define a imagem de fundo, com ajuste para cobrir toda a tela */
+  background-image: url('img/img_fundo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
+  /* flexbox para centralizar o conteúdo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* estilo para o título */
+.titulo {
+  color: aliceblue;
+  text-shadow: 5px 5px 5px black;
+  font-size: 28px;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.subtitulo{
+  color: aliceblue;
+  text-shadow: 5px 5px 5px black;
+  padding-bottom: 0px;
+}
+
+/* estilo do formulário */
+form {
+  color: black;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 20px auto;
+  max-width: 350px;
+  width: 90%;
+  text-align: left;
+}
+
+/* estilos para os campos de entrada de texto e número */
+input[type="text"], input[type="number"] {
+  width: calc(100% - 20px); /* preenche toda a largura disponível com margem */
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* estilo para os botões */
+button {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* altera a cor de fundo para um tom mais escuro */
+button:hover {
+  background-color: #b71c1c;
+}
+
+/* diferenciar os botões de nome e numero para o de pesquisa */
+.btn1 {/* o de alterar nome e numero */
+  width: 100%;
+  max-width: 400px;
+}
+.btn2 {/* o de pesquisa */
+  background-color: #ffffff00;
+  width: 100%;
+  max-width: 40px;
+}
+
+.icon-lupa{
+  background-color: #d32f2f00;
+  width: 15px; 
+  height: 15px;
+}
+
+
+
+/* area de resultado */
+#result {
+  color: black;
+  margin-top: 20px;
+  padding: 25px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.input-wrapper {
+  display: flex;
+  width: 100%;  
+  position: relative;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 400px;
+}
+
+#caixa-paginas{
+  width: 92%;
+  padding: 20px;
+  background-color: #282c34;
+  border: 2px solid white;
+  border-radius: 12px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+}
+#caixa-paginas nav {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+#caixa-paginas a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#caixa-paginas a:hover{
+  font-size: 19px;
+  color: aliceblue;
+  text-shadow: 5px 5px 5px black;
+}
+
+#back{
+  width: 7vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 7px;
+  background-color: #222;
+  font-weight: bold;
+}
+
+#back a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#back a:hover, .atual {
+  font-size: 19px;
+  color: aliceblue;
+  text-shadow: 5px 5px 5px black;
+}
+
+.game-container {
+  padding: 30px;
+  background-color: #282c34;
+  border: 1px solid white;
+  border-radius: 12px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+  color: aliceblue;
+}
+
+.btn-dificuldade{
+  width: 100px;
+}
+
+.img-game{
+  height: 200px;
+}
+

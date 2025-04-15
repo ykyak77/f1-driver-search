@@ -1,0 +1,13 @@
+{
+    "name": "f1-react-projeto",
+    "version": "1.0.0",
+    "description": "Projeto React + API OpenF1 rodando juntos",
+    "main": "index.js",
+    "scripts": {
+      "dev": "concurrently \"node backend/f1.js\" \"npm run dev --prefix frontend\""
+    },
+    "devDependencies": {
+      "concurrently": "^8.2.2"
+    }
+  }
+  
