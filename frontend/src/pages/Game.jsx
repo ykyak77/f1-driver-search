@@ -13,6 +13,8 @@ function Game() {
   const [acertos, setAcertos] = useState(0); // contador de acertos do jogador
   const [dificuldade, setDificuldade] = useState(null); // nivel de dificuldade do jogo
   const [carregando, setCarregando] = useState(false); // controle de carregamento (exibe carregando...)
+  const tempoGame ={ facil: 15, medio: 10, dificil: 5 }; // tempo de jogo baseado na dificuldade
+  const acertosNecessarios = { facil: 5, medio: 10, dificil: 20 }; // acertos necessários para vencer baseado na dificuldade
 
   // função que inicia o jogo, recebe o nível de dificuldade
   const iniciarJogo = async (nivel) => {
@@ -25,12 +27,8 @@ function Game() {
       setModo('jogando'); // define o modo como "jogando"
       setDificuldade(nivel); // define a dificuldade escolhida
 
-      // definição do tempo inicial e acertos necessarios baseados no nivel de dificuldade
-      const tempoInicial = nivel === 'facil' ? 15 : nivel === 'medio' ? 10 : 5;
-      const acertosNecessarios = nivel === 'facil' ? 5 : nivel === 'medio' ? 10 : 20;
-
       // chama a função para sortear o primeiro piloto
-      sortearPiloto(data, tempoInicial, acertosNecessarios);
+      sortearPiloto(data, tempoGame[nivel]);
     } catch (error) {
       // caso haja erro na requisição exibe no console
       console.error('Erro ao iniciar o jogo:', error);
@@ -41,7 +39,7 @@ function Game() {
   };
 
   // função para sortear um piloto aleatório da lista
-  const sortearPiloto = (lista, tempoInicial, acertosNecessarios) => {
+  const sortearPiloto = (lista, tempoGame) => {
     const novaLista = [...lista]; // cria uma copia da lista de pilotos
     const index = Math.floor(Math.random() * novaLista.length); // sorteia um índice aleatório
     const escolhido = novaLista.splice(index, 1)[0]; // remove o piloto sorteado da lista
@@ -49,7 +47,7 @@ function Game() {
     setPilotosRestantes(novaLista); // atualiza a lista de pilotos restantes
     setResposta(''); // reseta a resposta do jogador
     setStatus('jogando'); // muda o status para "jogando"
-    setTimer(tempoInicial); // define o tempo inicial do jogo
+    setTimer(tempoGame); // define o tempo inicial do jogo
   };
 
   // efeito para controlar o timer do jogo
@@ -80,7 +78,7 @@ function Game() {
       setAcertos(novosAcertos);
 
       // Checa se o número de acertos atingiu o mínimo para vencer
-      if (novosAcertos >= (dificuldade === 'facil' ? 5 : dificuldade === 'medio' ? 10 : 20)) {
+      if (novosAcertos >= acertosNecessarios[dificuldade]) {
         setModo('vitoria'); // se venceu, muda o modo para "vitoria"
         return;
       }
@@ -92,7 +90,7 @@ function Game() {
       }
 
       setStatus('acertou'); // caso acerte, exibe "acertou"
-      setTimeout(() => sortearPiloto(pilotosRestantes, 10), 1000); // sorteia um novo piloto após 1 segundo
+      setTimeout(() => sortearPiloto(pilotosRestantes, tempoGame[dificuldade]), 1000); // sorteia um novo piloto após 1 segundo
     } else {
       setStatus('errou'); // se errar, o status vira "errou"
       setModo('errou'); // muda o modo para "errou"
