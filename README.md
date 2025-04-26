@@ -63,6 +63,7 @@ npm install
 ### 💻 Frontend (React + Vite)
 
 ```bash
+cd ..
 cd frontend
 npm install
 ```

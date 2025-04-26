@@ -1,15 +1,19 @@
+// URL base da API OpenF1
 import { useState } from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import "../style.css";
 
 function App() {
-  const [modoBusca, setModoBusca] = useState(''); // 'nome' ou 'numero'
+  const [modoBusca, setModoBusca] = useState('');
   const [driverName, setDriverName] = useState('');
   const [driverNumber, setDriverNumber] = useState('');
-  const [resultado, setResultado] = useState('');
+  const [pilotos, setPilotos] = useState([]);
+  const [erro, setErro] = useState('');
 
-
-  const limparResultado = () => setResultado('');
+  const limparResultado = () => {
+    setPilotos([]);
+    setErro('');
+  };
 
   const buscarPiloto = async (event) => {
     event.preventDefault();
@@ -30,32 +34,26 @@ function App() {
 
     try {
       const response = await fetch(`http://localhost:3000/search?${searchParam}=${queryParam}`);
-      const data = await response.json();
 
-      if (!data || data.length === 0) {
-        setResultado('<p>Nenhum dado encontrado.</p>');
-        return;
+      // Verifique se a resposta é JSON
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        const data = await response.json();
+
+        if (!data || data.length === 0 || data.message) {
+          setErro('Nenhum dado encontrado.');
+          setPilotos([]);
+        } else {
+          setPilotos(data);
+          setErro('');
+        }
+      } else {
+        throw new Error("Resposta não é JSON");
       }
-
-      let resultHTML = `<h2>Informações do Piloto:</h2>`;
-      data.forEach((piloto) => {
-        resultHTML += `
-          <strong>Nome Completo:</strong> ${piloto.full_name || 'Desconhecido'} <br>
-          <strong>Primeiro Nome:</strong> ${piloto.first_name || 'Desconhecido'} <br>
-          <strong>Sobrenome:</strong> ${piloto.last_name || 'Desconhecido'} <br>
-          <strong>Sigla de Transmissão:</strong> ${piloto.name_acronym || 'Desconhecido'} <br>
-          <strong>País de origem:</strong> ${piloto.country_code || 'Desconhecido'} <br>
-          <strong>Equipe:</strong> ${piloto.team_name || 'Sem equipe'} <br>
-          <strong>Número do Piloto:</strong> ${piloto.driver_number || 'N/A'} <br>
-          ${piloto.headshot_url ? `<img src="${piloto.headshot_url}" alt="${piloto.full_name}" width="150">` : ''}
-          <br><br>
-         `;
-      });
-
-      setResultado(resultHTML);
     } catch (error) {
       console.error('Erro na requisição:', error);
-      setResultado('<p>Erro ao buscar os dados!</p>');
+      setErro('Erro ao buscar os dados!');
+      setPilotos([]);
     }
   };
 
@@ -65,13 +63,12 @@ function App() {
         <Link to="/">Voltar</Link>
       </div>
 
-      <h1 class="titulo">Consultar Piloto por:</h1>
+      <h1 className="titulo">Consultar Piloto por:</h1>
 
       <form id="pilotForm" onSubmit={buscarPiloto}>
-
         {modoBusca === 'nome' && (
-          <div id="nameField" style={{ display: modoBusca === 'nome' ? 'block' : 'none' }}>
-            <label  htmlFor="driverName">Primeiro Nome do Piloto:</label>
+          <div id="nameField">
+            <label htmlFor="driverName">Primeiro Nome do Piloto:</label>
             <div className="input-wrapper">
               <input
                 type="text"
@@ -89,7 +86,7 @@ function App() {
         )}
 
         {modoBusca === 'numero' && (
-          <div id="numberField" style={{ display: modoBusca === 'numero' ? 'block' : 'none' }}>
+          <div id="numberField">
             <label htmlFor="driverNumber">Número do Piloto:</label>
             <div className="input-wrapper">
               <input
@@ -110,7 +107,6 @@ function App() {
         <div>
           <button
             className="btn1"
-            id="btnNome"
             type="button"
             onClick={() => {
               setModoBusca('nome');
@@ -122,7 +118,6 @@ function App() {
           </button>
           <button
             className="btn1"
-            id="btnNumero"
             type="button"
             onClick={() => {
               setModoBusca('numero');
@@ -135,13 +130,32 @@ function App() {
         </div>
       </form>
 
-    {resultado && (
-      <div id="result">
-        <div dangerouslySetInnerHTML={{ __html: resultado }} />
-        <button className="btn1" onClick={limparResultado}>Fechar</button>
-      </div>
-    )}
-
+      {(pilotos.length > 0 || erro) && (
+        <div id="result">
+          {erro ? (
+            <p>{erro}</p>
+          ) : (
+            <div>
+              <h2>Informações do Piloto:</h2>
+              {pilotos.map((piloto, index) => (
+                <div key={index}>
+                  <p><strong>Nome Completo:</strong> {piloto.full_name || 'Desconhecido'}</p>
+                  <p><strong>Primeiro Nome:</strong> {piloto.first_name || 'Desconhecido'}</p>
+                  <p><strong>Sobrenome:</strong> {piloto.last_name || 'Desconhecido'}</p>
+                  <p><strong>Sigla de Transmissão:</strong> {piloto.name_acronym || 'Desconhecido'}</p>
+                  <p><strong>País de origem:</strong> {piloto.country_code || 'Desconhecido'}</p>
+                  <p><strong>Equipe:</strong> {piloto.team_name || 'Sem equipe'}</p>
+                  <p><strong>Número do Piloto:</strong> {piloto.driver_number || 'N/A'}</p>
+                  {piloto.headshot_url && (
+                    <img src={piloto.headshot_url} alt={piloto.full_name} width="150" />
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+          <button className="btn1" onClick={limparResultado}>Fechar</button>
+        </div>
+      )}
     </>
   );
 }

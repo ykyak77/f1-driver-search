@@ -21,7 +21,7 @@ function Game() {
     setCarregando(true); // ativa o carregamento
     try {
       // requisição para obter dados dos pilotos da API OpenF1
-      const res = await fetch('https://api.openf1.org/v1/drivers');//nao precisa mexer direto na API f1.js
+      const res = await fetch('http://localhost:3000/pilotos');//nao precisa mexer direto na API f1.js
       const data = await res.json(); // converte a resposta para JSON
       setPilotosRestantes(data); // armazena os pilotos restantes
       setModo('jogando'); // define o modo como "jogando"
